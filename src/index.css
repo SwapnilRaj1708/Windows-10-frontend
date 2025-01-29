@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  overflow: hidden;
+  font-family: "Segoe UI", "Noto Sans", "Open Sans", Frutiger,
+    "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+:root {
+  --neutral-white: 255, 255, 255;
+  --neutral-black: 0, 0, 0;
+  --accent-color: 9, 255, 0;
+
+  --dark-theme: var(--neutral-black);
+  --light-theme: var(--neutral-white);
+
+  --taskbar-height: 2.8rem;
+  --taskbar-background-hover-animation-duration: 0.1s;
+  --taskbar-background-color: 28, 28, 28;
+  --taskbar-background-color-alpha: 0.9;
+  --taskbar-backdrop-filter-blur: 30px;
+  --taskbar-icon-background-color-hover: 54, 54, 54;
+  --taskbar-icon-color: 255, 255, 255;
+  --taskbar-icon-color-hover: var(--accent-color);
+  --taskbar-icon-outline-color: 92, 92, 92;
+  --taskbar-search-bar-background-color: var(
+    --taskbar-icon-background-color-hover
+  );
+  --taskbar-search-bar-background-color-hover: 70, 70, 70;
+  --taskbar-search-bar-outline-color-hover: 120, 120, 120;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  } */
+}
+
+body {
+  width: 100vw;
+  height: 100lvh;
+  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
+
+  /* color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb)); */
+}
