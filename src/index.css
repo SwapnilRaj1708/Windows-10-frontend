@@ -60,6 +60,12 @@
   --taskbar-search-bar-background-color-hover: 70, 70, 70;
   --taskbar-search-bar-outline-color-hover: 120, 120, 120;
 
+  /* Context Menu */
+  --context-menu-background-color: 43, 43, 43;
+  --context-menu-hr-background-color: 128, 128, 128;
+  --context-menu-item-hover-background-color: 255, 255, 255, 0.1;
+  --context-menu-item-border-color: 160, 160, 160;
+
   /* Scrollbar */
   --scrollbar-track-color: 57, 72, 78;
   --scrollbar-thumb-color: 97, 108, 113;
