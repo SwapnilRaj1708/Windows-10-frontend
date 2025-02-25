@@ -20,25 +20,74 @@
 :root {
   --neutral-white: 255, 255, 255;
   --neutral-black: 0, 0, 0;
-  --accent-color: 9, 255, 0;
+  --accent-color: 0, 120, 215;
 
   --dark-theme: var(--neutral-black);
   --light-theme: var(--neutral-white);
 
-  --taskbar-height: 2.8rem;
-  --taskbar-background-hover-animation-duration: 0.1s;
-  --taskbar-background-color: 28, 28, 28;
+  --gray-color: 37, 53, 60;
+  --gray-color-hover: 81, 94, 100;
+  --gray-color-active: 101, 103, 104;
+
+  /* Start Menu */
+  --windows-start-menu-background-color: var(--gray-color);
+  --start-menu-category-tiles-background-color: 57, 72, 78;
+  --start-menu-category-tiles-hover-background-color: 79, 91, 96;
+  --start-menu-category-tiles-hover-border-color: 156, 163, 166;
+
+  /* Taskbar */
+  --taskbar-height: 2.5rem;
+  --taskbar-background-color: 32, 52, 64;
   --taskbar-background-color-alpha: 0.9;
   --taskbar-backdrop-filter-blur: 30px;
-  --taskbar-icon-background-color-hover: 54, 54, 54;
+
+  --taskbar-background-hover-animation-duration: 0.1s;
+
+  --taskbar-icon-background-color-hover: 55, 75, 83;
+  --taskbar-icon-background-color-active: 42, 64, 72;
   --taskbar-icon-color: 255, 255, 255;
-  --taskbar-icon-color-hover: var(--accent-color);
   --taskbar-icon-outline-color: 92, 92, 92;
+  /* --taskbar-icon-color-hover: var(--accent-color); */
+
+  --taskbar-active-app-stroke-color: 118, 185, 237;
+  --taskbar-active-app-background-color: 77, 94, 102;
+  --taskbar-active-app-background-color-hover: 95, 110, 117;
+  --taskbar-active-app-background-color-active: 87, 104, 110;
+
   --taskbar-search-bar-background-color: var(
     --taskbar-icon-background-color-hover
   );
   --taskbar-search-bar-background-color-hover: 70, 70, 70;
   --taskbar-search-bar-outline-color-hover: 120, 120, 120;
+
+  /* Scrollbar */
+  --scrollbar-track-color: 57, 72, 78;
+  --scrollbar-thumb-color: 97, 108, 113;
+  --scrollbar-thumb-hover-color: 136, 145, 148;
+}
+
+::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  box-shadow: none;
+  background-color: rgb(var(--scrollbar-track-color));
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--scrollbar-thumb-color));
+  background-clip: content-box;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--scrollbar-thumb-hover-color));
 }
 
 @media (prefers-color-scheme: dark) {

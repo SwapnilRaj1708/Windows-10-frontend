@@ -28,7 +28,6 @@ export const lockScreenSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { setInitialLoad, setIsLocked, resetLockScreenSlice } =
   lockScreenSlice.actions;
 

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import main_screen_background from "./main_screen_background.jpg";
-import Taskbar from "./Taskbar";
+import Taskbar from "./Taskbar/Taskbar";
 import { IRootState } from "@/app/store";
 // import DesktopIcons from "./DesktopIcons";
 
