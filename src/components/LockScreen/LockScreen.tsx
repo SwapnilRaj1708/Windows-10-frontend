@@ -52,7 +52,7 @@ const LockScreen = () => {
   return (
     <main
       className={twMerge(
-        "absolute left-0 top-0 z-10 h-full w-full bg-black bg-cover bg-center text-white transition-all duration-500",
+        "absolute left-0 top-0 z-10 h-full w-full overflow-hidden bg-black bg-cover bg-center text-white transition-all duration-500",
         initialLoad ? "opacity-100" : isVisible ? "opacity-100" : "opacity-0",
       )}
       style={{
