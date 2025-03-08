@@ -18,10 +18,25 @@ export default function DesktopIcons() {
       name: "l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l ",
       icon: file_explorer_icon,
     },
+    {
+      _id: "1",
+      name: "File Explorer",
+      icon: file_explorer_icon,
+    },
+    {
+      _id: "2",
+      name: "lllllllllllllllllllllllllllllllllllllllllllll",
+      icon: file_explorer_icon,
+    },
+    {
+      _id: "3",
+      name: "l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l l ",
+      icon: file_explorer_icon,
+    },
   ];
 
   return (
-    <div className="absolute grid h-full w-full auto-cols-auto grid-flow-row auto-rows-max content-start items-start justify-start gap-x-[.25rem] gap-y-4 px-1 py-2">
+    <div className="absolute flex h-full max-h-screen w-full flex-col flex-wrap content-start items-start justify-start gap-y-4 px-[0.0625rem] py-[0.3125rem] pb-[var(--taskbar-height)]">
       {desktopIcons.map((icon) => (
         <DesktopIcon key={icon._id} {...icon} />
       ))}

@@ -124,7 +124,7 @@ export default function Taskbar() {
       >
         <WindowsStartMenu />
       </motion.div>
-      <footer className="taskbar backdrop-[var(--taskbar-backdrop-filter)] fixed bottom-0 flex h-[var(--taskbar-height)] w-full justify-between bg-[rgb(var(--taskbar-background-color),var(--taskbar-background-color-alpha))] backdrop-blur-[var(--taskbar-backdrop-filter-blur)]">
+      <footer className="taskbar backdrop-[var(--taskbar-backdrop-filter)] fixed bottom-0 z-10 flex h-[var(--taskbar-height)] w-full justify-between bg-[rgb(var(--taskbar-background-color),var(--taskbar-background-color-alpha))] backdrop-blur-[var(--taskbar-backdrop-filter-blur)]">
         <div className="flex h-full flex-row">
           <WindowsStartButton />
           <TaskbarInput />
