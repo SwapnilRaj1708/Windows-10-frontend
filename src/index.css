@@ -89,6 +89,10 @@
   /* --desktop-icon-border-color-alpha: 0.5; */
   --desktop-icon-inner-image-width: 2.8125rem;
   --desktop-icon-inner-image-height: var(--desktop-icon-inner-image-width);
+
+  /* Folder */
+  --folder-background-color: 0, 0, 0;
+  --folder-border-color: 0, 0, 0, 0.5;
 }
 
 ::-webkit-scrollbar {

@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import file_explorer_icon from "../../assets/icons/file_explorer_icon.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import WindowsStartButton from "./WindowsStartButton";
 import { motion } from "motion/react";
 import { IRootState } from "@/app/store";
 import { twMerge } from "tailwind-merge";
 import WindowsStartMenu from "./WindowsStartMenu";
 import NotificationIcon from "./NotificationIcon";
+import { setOpen } from "@/context/redux/globalDataSlice";
+import { openFolder } from "@/context/redux/folderSlice";
 
 //function to display the current time as 21:30 format (24 hour format) with both hours and minutes padded with 0 if they are single digit
 const getTime = () => {
@@ -45,18 +46,25 @@ const TaskbarInput = () => {
 };
 
 const TaskbarIcon = ({
-  src,
-  alt,
+  id,
+  icon,
+  name,
   isFocused,
+  isOpened,
 }: {
-  src: string;
-  alt: string;
+  id: string;
+  icon: string;
+  name: string;
   isFocused: boolean;
+  isOpened: boolean;
 }) => {
-  const [isOpened, setIsOpened] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    setIsOpened(!isOpened);
+    if (!isOpened) {
+      dispatch(setOpen({ id }));
+      dispatch(openFolder({ id }));
+    }
   };
 
   return (
@@ -68,7 +76,7 @@ const TaskbarIcon = ({
       )}
       onClick={handleClick}
     >
-      <img src={src} alt={alt} className="aspect-square w-6 object-contain" />
+      <img src={icon} alt={name} className="aspect-square w-6 object-contain" />
       {isOpened && (
         <div
           className={twMerge(
@@ -87,6 +95,15 @@ export default function Taskbar() {
   // const dispatch = useDispatch();
   const isWindowsStartMenuOpen = useSelector(
     (state: IRootState) => state.windowsStartMenu.isWindowsStartMenuOpen,
+  );
+  const taskbarIcons = useSelector((state: IRootState) =>
+    state.globalData.data.map((item) => ({
+      id: item.id,
+      name: item.name,
+      icon: item.icon,
+      isOpened: item.isOpened,
+      isFocused: item.isFocused,
+    })),
   );
 
   //set the time and date to the current time and date using the getTime and getDate functions using the setInterval function to update the time and date every second in useEffect
@@ -129,13 +146,8 @@ export default function Taskbar() {
           <WindowsStartButton />
           <TaskbarInput />
           <div className="flex h-full flex-row gap-[0.0625rem]">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <TaskbarIcon
-                isFocused={index === 1}
-                key={index}
-                src={file_explorer_icon}
-                alt="File Explorer icon"
-              />
+            {taskbarIcons.map((icon) => (
+              <TaskbarIcon key={icon.id} {...icon} />
             ))}
           </div>
         </div>

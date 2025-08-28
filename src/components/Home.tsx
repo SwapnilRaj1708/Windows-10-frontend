@@ -5,7 +5,8 @@ import { IRootState } from "@/app/store";
 import ContextMenu from "./ContextMenu/ContextMenu";
 // import DesktopIcons from "./DesktopIcons";
 import file_explorer_icon from "../assets/icons/file_explorer_icon.png";
-import DesktopIcons from "@/pages/DesktopIcons";
+import DesktopIcons from "@/components/Desktop/DesktopIcons";
+import FolderContainer from "./Folder/FolderContainer";
 
 export default function Home() {
   const { isLocked } = useSelector((state: IRootState) => state.lockScreen);
@@ -80,6 +81,7 @@ export default function Home() {
       {/* <ContextMenu items={contextMenuItems} /> */}
       <Taskbar />
       <DesktopIcons />
+      <FolderContainer />
     </main>
   ) : (
     <main className="relative h-screen max-h-screen w-screen bg-black"></main>

@@ -48,7 +48,7 @@ const LockScreenPasswordScreen = ({
               value={password}
               onChange={handlePasswordChange}
               onBlur={() => setPassword("")}
-              autoComplete="off"
+              autoComplete="current-password"
               autoFocus
             />
           )}

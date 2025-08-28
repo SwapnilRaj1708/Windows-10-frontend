@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { taskbarSlice } from "../features/taskbar/taskbarSlice";
+import { globalDataSlice } from "@/context/redux/globalDataSlice";
 import { lockScreenSlice } from "@/context/redux/lockScreenSlice";
 import { windowsStartMenuSlice } from "@/context/redux/windowsStartMenuSlice";
+import { openFoldersSlice } from "@/context/redux/folderSlice";
 
 const store = configureStore({
   reducer: {
-    [taskbarSlice.name]: taskbarSlice.reducer,
+    [globalDataSlice.name]: globalDataSlice.reducer,
     [lockScreenSlice.name]: lockScreenSlice.reducer,
     [windowsStartMenuSlice.name]: windowsStartMenuSlice.reducer,
+    [openFoldersSlice.name]: openFoldersSlice.reducer,
   },
 });
 
