@@ -56,6 +56,7 @@ export const openFoldersSlice = createSlice({
         .data.find((folder) => folder.id === id);
 
       // Create a new folder with the next available z-index
+      console.log(folder);
       const newFolder: IFolder = {
         type: folder?.type || "folder",
         id,
@@ -66,7 +67,7 @@ export const openFoldersSlice = createSlice({
         isOpened: true,
         isFocused: true,
         name: folder?.name || "New Folder",
-        icon: folder?.icon || "src/assets/icons/file_explorer_icon.png",
+        icon: folder?.icon || "src/assets/icons/file-explorer.png",
         children: folder?.children || [],
         prevState: {
           size: { width: 640, height: 640 },

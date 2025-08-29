@@ -3,7 +3,7 @@ import { GoPerson } from "react-icons/go";
 import { IoIosMenu } from "react-icons/io";
 import { LiaFile } from "react-icons/lia";
 import { PiGear, PiImageLight } from "react-icons/pi";
-import file_explorer_icon from "../../assets/icons/file_explorer_icon.png";
+import fileExplorerIcon from "../../assets/icons/file-explorer.png";
 import { setWindowsStartMenuClose } from "@/context/redux/windowsStartMenuSlice";
 import { useDispatch } from "react-redux";
 import { useEffect, useRef } from "react";
@@ -193,18 +193,18 @@ const WindowsStartMenu = () => {
           <AllAppsItemTitle>C</AllAppsItemTitle>
         </AllAppsItem>
         <AllAppsItem title="Calculator">
-          <AllAppsItemImage src={file_explorer_icon} alt="file_explorer_icon" />
+          <AllAppsItemImage src={fileExplorerIcon} alt="file-explorer" />
           <AllAppsItemTitle>Calculator</AllAppsItemTitle>
         </AllAppsItem>
         <AllAppsItem noHover={true}>
           <AllAppsItemTitle>F</AllAppsItemTitle>
         </AllAppsItem>
         <AllAppsItem title="File Explorer">
-          <AllAppsItemImage src={file_explorer_icon} alt="file_explorer_icon" />
+          <AllAppsItemImage src={fileExplorerIcon} alt="file-explorer" />
           <AllAppsItemTitle>File Explorer</AllAppsItemTitle>
         </AllAppsItem>
         <AllAppsItem title="File Explorer">
-          <AllAppsItemImage src={file_explorer_icon} alt="file_explorer_icon" />
+          <AllAppsItemImage src={fileExplorerIcon} alt="file-explorer" />
           <AllAppsItemTitle>File Explorer</AllAppsItemTitle>
         </AllAppsItem>
       </AllApps>
@@ -213,34 +213,19 @@ const WindowsStartMenu = () => {
           <CategoryTitle>Productivity</CategoryTitle>
           <CategoryTilesContainer>
             <CategoryTile>
-              <CategoryTileImage
-                src={file_explorer_icon}
-                alt="file_explorer_icon"
-              />
+              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage
-                src={file_explorer_icon}
-                alt="file_explorer_icon"
-              />
+              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage
-                src={file_explorer_icon}
-                alt="file_explorer_icon"
-              />
+              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage
-                src={file_explorer_icon}
-                alt="file_explorer_icon"
-              />
+              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage
-                src={file_explorer_icon}
-                alt="file_explorer_icon"
-              />
+              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
             </CategoryTile>
           </CategoryTilesContainer>
         </Category>
@@ -248,34 +233,19 @@ const WindowsStartMenu = () => {
           <CategoryTitle>Explore</CategoryTitle>
           <CategoryTilesContainer>
             <CategoryTile>
-              <CategoryTileImage
-                src={file_explorer_icon}
-                alt="file_explorer_icon"
-              />
+              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage
-                src={file_explorer_icon}
-                alt="file_explorer_icon"
-              />
+              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage
-                src={file_explorer_icon}
-                alt="file_explorer_icon"
-              />
+              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage
-                src={file_explorer_icon}
-                alt="file_explorer_icon"
-              />
+              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage
-                src={file_explorer_icon}
-                alt="file_explorer_icon"
-              />
+              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
             </CategoryTile>
           </CategoryTilesContainer>
         </Category>

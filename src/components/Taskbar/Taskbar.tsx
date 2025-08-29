@@ -47,13 +47,13 @@ const TaskbarInput = () => {
 
 const TaskbarIcon = ({
   id,
-  icon,
+  taskbarIcon,
   name,
   isFocused,
   isOpened,
 }: {
   id: string;
-  icon: string;
+  taskbarIcon: string;
   name: string;
   isFocused: boolean;
   isOpened: boolean;
@@ -76,7 +76,11 @@ const TaskbarIcon = ({
       )}
       onClick={handleClick}
     >
-      <img src={icon} alt={name} className="aspect-square w-6 object-contain" />
+      <img
+        src={taskbarIcon}
+        alt={name}
+        className="aspect-square w-6 object-contain"
+      />
       {isOpened && (
         <div
           className={twMerge(
@@ -101,6 +105,7 @@ export default function Taskbar() {
       id: item.id,
       name: item.name,
       icon: item.icon,
+      taskbarIcon: item.taskbarIcon,
       isOpened: item.isOpened,
       isFocused: item.isFocused,
     })),

@@ -6,6 +6,7 @@ export interface IGlobalDataCommon {
   id: string;
   name: string;
   icon: string;
+  taskbarIcon: string;
   isOpened: boolean;
   isFocused: boolean;
   isPinnedToTaskbar: boolean;
@@ -32,15 +33,17 @@ const defaultValues: InitialState = {
   data: [
     {
       type: "folder",
-      id: "folder-1",
-      name: "Folder 1",
-      icon: "src/assets/icons/file_explorer_icon.png",
+      id: "this-pc-folder",
+      name: "This PC",
+      icon: "src/assets/icons/this-pc.png",
+      taskbarIcon: "src/assets/icons/file-explorer.png",
       children: [
         {
           type: "file",
-          id: "file-1",
-          name: "File 1",
+          id: "resume-file",
+          name: "Resume",
           icon: "src/assets/icons/pdf.png",
+          taskbarIcon: "src/assets/icons/file-explorer.png",
           isOpened: false,
           isFocused: false,
           isPinnedToTaskbar: false,
@@ -54,15 +57,17 @@ const defaultValues: InitialState = {
     },
     {
       type: "folder",
-      id: "folder-2",
-      name: "Folder 2",
-      icon: "src/assets/icons/file_explorer_icon.png",
+      id: "resume-folder",
+      name: "Resume",
+      icon: "src/assets/icons/folder.png",
+      taskbarIcon: "src/assets/icons/file-explorer.png",
       children: [
         {
           type: "file",
-          id: "file-2",
-          name: "File 2",
+          id: "resume-file",
+          name: "Resume",
           icon: "src/assets/icons/pdf.png",
+          taskbarIcon: "src/assets/icons/file-explorer.png",
           isOpened: false,
           isFocused: false,
           isPinnedToTaskbar: false,
@@ -78,7 +83,8 @@ const defaultValues: InitialState = {
       type: "folder",
       id: "folder-3",
       name: "Folder 3",
-      icon: "src/assets/icons/file_explorer_icon.png",
+      icon: "src/assets/icons/folder.png",
+      taskbarIcon: "src/assets/icons/file-explorer.png",
       children: [],
       isOpened: false,
       isFocused: false,

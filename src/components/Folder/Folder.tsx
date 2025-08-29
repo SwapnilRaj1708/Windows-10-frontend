@@ -1,16 +1,18 @@
 import "./styles.css";
-import fileExplorerIcon from "@/assets/icons/file_explorer_icon.png";
+import fileExplorerIcon from "@/assets/icons/file-explorer.png";
 import React, { useEffect, useId, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   setClose,
   setFocus,
+  setOpen,
   setUnfocus,
 } from "@/context/redux/globalDataSlice";
 import {
   bringFolderToFront,
   closeFolder,
   maximizeFolder,
+  openFolder,
   restoreFolder,
   updateFolderPosition,
   updateFolderSize,
@@ -32,7 +34,23 @@ export const MinimizeIcon = ({ className }: { className?: string }) => {
   );
 };
 
-export const MaximizeIcon = ({ className }: { className?: string }) => {
+export const WindowedIcon = ({ className }: { className?: string }) => {
+  return (
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 10 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <rect x="0.5" y="2.5" width="7" height="7" stroke="white" />
+      <path d="M10 8H8V7H9V1H3V2H2V0H10V8Z" fill="white" />
+    </svg>
+  );
+};
+
+export const MaximizedIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       width="10"
@@ -269,6 +287,11 @@ export default function Folder({ folder }: { folder: IFolder }) {
     dispatch(closeFolder({ id: folder.id }));
   };
 
+  const handleChildrenClick = (id: string) => {
+    dispatch(setOpen({ id }));
+    dispatch(openFolder({ id }));
+  };
+
   // Combined drag and resize functionality
   useEffect(() => {
     if (!folder || !folderRef.current) return;
@@ -466,7 +489,7 @@ export default function Folder({ folder }: { folder: IFolder }) {
             className="flex h-full w-[2.8125rem] items-center justify-center bg-transparent hover:bg-[rgb(26,26,26)] active:bg-[rgb(51,51,51)]"
             onClick={handleMaximize}
           >
-            <MaximizeIcon />
+            {folder.isMaximized ? <WindowedIcon /> : <MaximizedIcon />}
           </div>
           <div
             className="flex h-full w-[2.8125rem] items-center justify-center bg-transparent hover:bg-[rgb(232,17,35)] active:bg-[rgb(139,10,20)]"
@@ -569,6 +592,7 @@ export default function Folder({ folder }: { folder: IFolder }) {
                 {/* add seleted bg effect here later */}
                 {folder.children?.map((item, index) => (
                   <div
+                    onDoubleClick={() => handleChildrenClick(item.id)}
                     key={index}
                     className="flex h-fit max-h-[161px] w-[105px] flex-col items-center justify-start border border-[rgb(60,60,60)] px-[0.3125rem] pb-0.5 pt-[0.1875rem] hover:bg-[rgb(77,77,77)] active:bg-[rgb(98,98,98)]"
                   >

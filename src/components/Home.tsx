@@ -4,7 +4,7 @@ import Taskbar from "./Taskbar/Taskbar";
 import { IRootState } from "@/app/store";
 import ContextMenu from "./ContextMenu/ContextMenu";
 // import DesktopIcons from "./DesktopIcons";
-import file_explorer_icon from "../assets/icons/file_explorer_icon.png";
+import fileExplorerIcon from "../assets/icons/file-explorer.png";
 import DesktopIcons from "@/components/Desktop/DesktopIcons";
 import FolderContainer from "./Folder/FolderContainer";
 
@@ -18,7 +18,7 @@ export default function Home() {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: file_explorer_icon,
+          icon: fileExplorerIcon,
         },
       ],
     },
@@ -28,7 +28,7 @@ export default function Home() {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: file_explorer_icon,
+          icon: fileExplorerIcon,
         },
       ],
     },
@@ -38,7 +38,7 @@ export default function Home() {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: file_explorer_icon,
+          icon: fileExplorerIcon,
         },
       ],
     },
@@ -54,7 +54,7 @@ export default function Home() {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: file_explorer_icon,
+          icon: fileExplorerIcon,
         },
       ],
     },
@@ -62,12 +62,12 @@ export default function Home() {
     {
       label: "Display settings",
       // onClick: () => console.log("Display settings clicked"),
-      icon: file_explorer_icon,
+      icon: fileExplorerIcon,
     },
     {
       label: "Personalize",
       // onClick: () => console.log("Personalize clicked"),
-      icon: file_explorer_icon,
+      icon: fileExplorerIcon,
     },
   ];
 
