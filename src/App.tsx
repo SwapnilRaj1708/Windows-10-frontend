@@ -1,5 +1,5 @@
-import Home from "./components/Home";
-import LockScreen from "./components/LockScreen/LockScreen";
+import Home from "./components/Home"
+import LockScreen from "./components/LockScreen/LockScreen"
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <LockScreen />
       <Home />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

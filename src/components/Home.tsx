@@ -1,15 +1,14 @@
-import { useSelector } from "react-redux";
-import main_screen_background from "./main_screen_background.jpg";
-import Taskbar from "./Taskbar/Taskbar";
-import { IRootState } from "@/app/store";
-import ContextMenu from "./ContextMenu/ContextMenu";
-// import DesktopIcons from "./DesktopIcons";
-import fileExplorerIcon from "../assets/icons/file-explorer.png";
-import DesktopIcons from "@/components/Desktop/DesktopIcons";
-import FolderContainer from "./Folder/FolderContainer";
+import { useSelector } from "react-redux"
+import { IRootState } from "@/app/store"
+import { WALLPAPER_1 } from "@/assets/assets"
+import fileExplorerIcon from "@/assets/icons/file-explorer.png"
+import ContextMenu from "./ContextMenu/ContextMenu"
+import DesktopIcons from "./Desktop/DesktopIcons"
+import DisplayContainer from "./Display/DisplayContainer"
+import Taskbar from "./Taskbar/Taskbar"
 
 export default function Home() {
-  const { isLocked } = useSelector((state: IRootState) => state.lockScreen);
+  const { isLocked } = useSelector((state: IRootState) => state.lockScreen)
 
   const contextMenuItems = [
     {
@@ -18,9 +17,9 @@ export default function Home() {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: fileExplorerIcon,
-        },
-      ],
+          icon: fileExplorerIcon
+        }
+      ]
     },
     {
       label: "Sort by",
@@ -28,9 +27,9 @@ export default function Home() {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: fileExplorerIcon,
-        },
-      ],
+          icon: fileExplorerIcon
+        }
+      ]
     },
     {
       label: "Refresh",
@@ -38,13 +37,13 @@ export default function Home() {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: fileExplorerIcon,
-        },
-      ],
+          icon: fileExplorerIcon
+        }
+      ]
     },
     { divider: true },
     {
-      label: "Paste",
+      label: "Paste"
       // onClick: () => console.log("Paste clicked"),
     },
     { divider: true },
@@ -54,36 +53,36 @@ export default function Home() {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: fileExplorerIcon,
-        },
-      ],
+          icon: fileExplorerIcon
+        }
+      ]
     },
     { divider: true },
     {
       label: "Display settings",
       // onClick: () => console.log("Display settings clicked"),
-      icon: fileExplorerIcon,
+      icon: fileExplorerIcon
     },
     {
       label: "Personalize",
       // onClick: () => console.log("Personalize clicked"),
-      icon: fileExplorerIcon,
-    },
-  ];
+      icon: fileExplorerIcon
+    }
+  ]
 
   return !isLocked ? (
     <main
       className="relative h-screen max-h-screen w-screen bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: `url(${main_screen_background})`,
+        backgroundImage: `url(${WALLPAPER_1})`
       }}
     >
       {/* <ContextMenu items={contextMenuItems} /> */}
       <Taskbar />
       <DesktopIcons />
-      <FolderContainer />
+      <DisplayContainer />
     </main>
   ) : (
-    <main className="relative h-screen max-h-screen w-screen bg-black"></main>
-  );
+    <main className="relative h-screen max-h-screen w-screen bg-black" />
+  )
 }

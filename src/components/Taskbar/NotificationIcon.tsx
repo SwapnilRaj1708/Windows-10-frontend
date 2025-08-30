@@ -10,7 +10,7 @@ const NotificationIcon = () => {
     >
       <path d="M1 17V1H20V17H14L11 20H10L7 17H1Z" stroke="white" />
     </svg>
-  );
-};
+  )
+}
 
-export default NotificationIcon;
+export default NotificationIcon

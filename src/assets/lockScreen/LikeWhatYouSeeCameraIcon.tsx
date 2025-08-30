@@ -12,7 +12,7 @@ const LikeWhatYouSeeCameraIcon = () => {
         fill="white"
       />
     </svg>
-  );
-};
+  )
+}
 
-export default LikeWhatYouSeeCameraIcon;
+export default LikeWhatYouSeeCameraIcon

@@ -1,62 +1,62 @@
-import { useState, useEffect } from "react";
-import LockScreen1 from "../../assets/lockScreen/lock-screen-1.jpg";
-import InternetIcon from "@/assets/lockScreen/InternetIcon";
-import LikeWhatYouSeeCameraIcon from "@/assets/lockScreen/LikeWhatYouSeeCameraIcon";
-import { LiaBatteryHalfSolid } from "react-icons/lia";
-import DateAndTime from "./DateAndTime";
-import { useSelector, useDispatch } from "react-redux";
-import { IRootState } from "@/app/store";
-import { twMerge } from "tailwind-merge";
-import { setIsLocked, setInitialLoad } from "@/context/redux/lockScreenSlice";
-import LockScreenPasswordScreen from "./LockScreenPasswordScreen";
+import { useEffect, useState } from "react"
+import { LiaBatteryHalfSolid } from "react-icons/lia"
+import { useDispatch, useSelector } from "react-redux"
+import { twMerge } from "tailwind-merge"
+import { IRootState } from "@/app/store"
+import { LOCK_SCREEN_1 } from "@/assets/assets"
+import InternetIcon from "@/assets/lockScreen/InternetIcon"
+import LikeWhatYouSeeCameraIcon from "@/assets/lockScreen/LikeWhatYouSeeCameraIcon"
+import { setInitialLoad, setIsLocked } from "@/context/redux/lockScreenSlice"
+import DateAndTime from "./DateAndTime"
+import LockScreenPasswordScreen from "./LockScreenPasswordScreen"
 
 const LockScreen = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { isLocked, initialLoad } = useSelector(
-    (state: IRootState) => state.lockScreen,
-  );
-  const [isVisible, setIsVisible] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
+    (state: IRootState) => state.lockScreen
+  )
+  const [isVisible, setIsVisible] = useState(false)
+  const [isClicked, setIsClicked] = useState(false)
 
   useEffect(() => {
-    if (!isLocked && !initialLoad) return;
-    setIsClicked(false);
+    if (!isLocked && !initialLoad) return
+    setIsClicked(false)
     if (initialLoad) {
-      setIsVisible(true);
-      dispatch(setInitialLoad(false));
-      return;
+      setIsVisible(true)
+      dispatch(setInitialLoad(false))
+      return
     }
 
-    const img = new Image();
-    img.src = LockScreen1;
+    const img = new Image()
+    img.src = LOCK_SCREEN_1
     img.onload = () => {
       setTimeout(() => {
-        setIsVisible(true);
-      }, 75);
-    };
-  }, [isLocked, initialLoad, dispatch]);
+        setIsVisible(true)
+      }, 75)
+    }
+  }, [isLocked, initialLoad, dispatch])
 
   const handleUnlock = () => {
-    setIsVisible(false);
+    setIsVisible(false)
     setTimeout(() => {
-      dispatch(setIsLocked(false));
-    }, 500);
-  };
+      dispatch(setIsLocked(false))
+    }, 500)
+  }
 
-  if (!isLocked && !initialLoad) return null;
+  if (!isLocked && !initialLoad) return null
 
   const handleClick = () => {
-    setIsClicked(true);
-  };
+    setIsClicked(true)
+  }
 
   return (
     <main
       className={twMerge(
         "absolute left-0 top-0 z-10 h-full w-full overflow-hidden bg-black bg-cover bg-center text-white transition-all duration-500",
-        initialLoad ? "opacity-100" : isVisible ? "opacity-100" : "opacity-0",
+        initialLoad ? "opacity-100" : isVisible ? "opacity-100" : "opacity-0"
       )}
       style={{
-        backgroundImage: `url(${LockScreen1})`,
+        backgroundImage: `url(${LOCK_SCREEN_1})`
       }}
     >
       {!isClicked && (
@@ -83,7 +83,7 @@ const LockScreen = () => {
         handleUnlock={handleUnlock}
       />
     </main>
-  );
-};
+  )
+}
 
-export default LockScreen;
+export default LockScreen

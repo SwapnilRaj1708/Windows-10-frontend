@@ -34,7 +34,7 @@ const InternetIcon = () => {
         fill="white"
       />
     </svg>
-  );
-};
+  )
+}
 
-export default InternetIcon;
+export default InternetIcon

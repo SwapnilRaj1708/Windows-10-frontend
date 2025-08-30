@@ -1,34 +1,24 @@
-import { useDispatch } from "react-redux";
-import { twMerge } from "tailwind-merge";
-import { useRef, useEffect } from "react";
-import type { KeyboardEvent as ReactKeyboardEvent } from "react";
-import {
-  IGlobalData,
-  setDesktopIconSelected,
-  setDesktopIconUnselected,
-  setOpen,
-} from "@/context/redux/globalDataSlice";
-import { openFolder } from "@/context/redux/folderSlice";
+import type { KeyboardEvent as ReactKeyboardEvent } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { twMerge } from "tailwind-merge"
+import type { AppDispatch, IRootState } from "@/app/store"
+import { openItemThunk } from "@/context/redux/globalDataSlice"
 
-export default function DesktopIcon({
-  id,
-  icon,
-  name,
-  isOpened,
-  isDesktopIconSelected,
-}: Pick<
-  IGlobalData,
-  "id" | "name" | "icon" | "isOpened" | "isDesktopIconSelected"
->) {
-  const dispatch = useDispatch();
-  const buttonRef = useRef<HTMLButtonElement>(null);
+export default function DesktopIcon({ id }: { id: string }) {
+  const { name, icon, isOpened } = useSelector(
+    (state: IRootState) => state.globalData[id]
+  )
+  const [isSelected, setIsSelected] = useState(false)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  const dispatch = useDispatch<AppDispatch>()
 
   // Focus when selected so keyboard works without extra click
   useEffect(() => {
-    if (isDesktopIconSelected) {
-      buttonRef.current?.focus();
+    if (isSelected) {
+      buttonRef.current?.focus()
     }
-  }, [isDesktopIconSelected]);
+  }, [isSelected])
 
   useEffect(() => {
     const handleDocumentMouseDown = (event: MouseEvent) => {
@@ -36,39 +26,38 @@ export default function DesktopIcon({
         buttonRef.current &&
         !buttonRef.current.contains(event.target as Node)
       ) {
-        if (isDesktopIconSelected) {
-          dispatch(setDesktopIconUnselected({ id }));
+        if (isSelected) {
+          setIsSelected(false)
         }
       }
-    };
+    }
 
-    document.addEventListener("click", handleDocumentMouseDown);
+    document.addEventListener("click", handleDocumentMouseDown)
     return () => {
-      document.removeEventListener("click", handleDocumentMouseDown);
-    };
-  }, [dispatch, id, isDesktopIconSelected]);
+      document.removeEventListener("click", handleDocumentMouseDown)
+    }
+  }, [isSelected])
 
   const handleMouseDown = () => {
-    dispatch(setDesktopIconSelected({ id }));
-  };
+    setIsSelected(true)
+  }
 
   const openThisFolder = () => {
-    dispatch(setOpen({ id }));
-    dispatch(openFolder({ id }));
-  };
+    dispatch(openItemThunk({ id }))
+  }
 
   const handleDoubleClick = () => {
     if (!isOpened) {
-      openThisFolder();
+      openThisFolder()
     }
-  };
+  }
 
   const handleKeyDown = (e: ReactKeyboardEvent<HTMLButtonElement>) => {
-    if (e.key === "Enter" && isDesktopIconSelected && !isOpened) {
-      e.preventDefault();
-      openThisFolder();
+    if (e.key === "Enter" && isSelected && !isOpened) {
+      e.preventDefault()
+      openThisFolder()
     }
-  };
+  }
 
   return (
     <button
@@ -79,8 +68,8 @@ export default function DesktopIcon({
       type="button"
       className={twMerge(
         "flex w-[var(--desktop-icon-width)] cursor-default flex-col items-center justify-center gap-0.5 p-[0.1875rem] outline-1 outline-offset-[-2px] outline-[rgb(var(--desktop-icon-hover-outline-color))] hover:bg-[rgb(var(--desktop-icon-hover-background-color))] hover:outline",
-        isDesktopIconSelected &&
-          "bg-[rgb(var(--desktop-icon-selected-background-color))] outline outline-[rgb(var(--desktop-icon-selected-outline-color))] hover:bg-[rgb(var(--desktop-icon-selected-hover-background-color))] hover:outline-[rgb(var(--desktop-icon-selected-hover-outline-color))]",
+        isSelected &&
+          "bg-[rgb(var(--desktop-icon-selected-background-color))] outline outline-[rgb(var(--desktop-icon-selected-outline-color))] hover:bg-[rgb(var(--desktop-icon-selected-hover-background-color))] hover:outline-[rgb(var(--desktop-icon-selected-hover-outline-color))]"
       )}
     >
       <div className="max-h-[var(--desktop-icon-inner-image-height)] w-full max-w-[var(--desktop-icon-inner-image-width)] pb-[3px] pr-[3px]">
@@ -94,5 +83,5 @@ export default function DesktopIcon({
         {name}
       </p>
     </button>
-  );
+  )
 }

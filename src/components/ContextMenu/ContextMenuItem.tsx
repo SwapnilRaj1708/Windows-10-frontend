@@ -1,33 +1,33 @@
-import { ChevronRight } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
+import { ChevronRight } from "lucide-react"
+import { Dispatch, SetStateAction } from "react"
 
 const ContextMenuItem = ({
   item,
-  setVisible,
+  setVisible
 }: {
   item: {
-    label?: string;
-    icon?: string;
-    onClick?: () => void;
+    label?: string
+    icon?: string
+    onClick?: () => void
     children?: {
-      label?: string;
-      icon?: string;
-      onClick?: () => void;
-    }[];
-  };
-  setVisible: Dispatch<SetStateAction<boolean>>;
+      label?: string
+      icon?: string
+      onClick?: () => void
+    }[]
+  }
+  setVisible: Dispatch<SetStateAction<boolean>>
 }) => {
   //   const [isChildrenMenuOpen, setIsChildrenMenuOpen] = useState(false);
 
   return (
     <div className="relative">
       <button
-        onClick={(e) => {
+        onClick={e => {
           //   setIsChildrenMenuOpen(true);
-          e.stopPropagation();
+          e.stopPropagation()
           if (item.onClick) {
-            item.onClick();
-            setVisible(false);
+            item.onClick()
+            setVisible(false)
           }
         }}
         className="relative flex h-[1.375rem] w-full items-center justify-between gap-2 bg-transparent pl-2 pr-[0.25rem] text-sm hover:bg-[rgb(var(--context-menu-item-hover-background-color))]"
@@ -77,7 +77,7 @@ const ContextMenuItem = ({
         </div>
       )} */}
     </div>
-  );
-};
+  )
+}
 
-export default ContextMenuItem;
+export default ContextMenuItem

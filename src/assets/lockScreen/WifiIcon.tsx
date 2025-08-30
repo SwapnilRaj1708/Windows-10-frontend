@@ -27,7 +27,7 @@ const WifiIcon = () => {
         fill="white"
       />
     </svg>
-  );
-};
+  )
+}
 
-export default WifiIcon;
+export default WifiIcon

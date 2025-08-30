@@ -1,35 +1,35 @@
-import AccessibilityIcon from "@/assets/lockScreen/AccessibilityIcon";
-import WifiIcon from "@/assets/lockScreen/WifiIcon";
-import { useState } from "react";
-import { BsPower } from "react-icons/bs";
-import { GoPerson } from "react-icons/go";
-import { twMerge } from "tailwind-merge";
+import { useState } from "react"
+import { BsPower } from "react-icons/bs"
+import { GoPerson } from "react-icons/go"
+import { twMerge } from "tailwind-merge"
+import AccessibilityIcon from "@/assets/lockScreen/AccessibilityIcon"
+import WifiIcon from "@/assets/lockScreen/WifiIcon"
 
 const LockScreenPasswordScreen = ({
   isClicked,
-  handleUnlock,
+  handleUnlock
 }: {
-  isClicked: boolean;
-  handleUnlock: () => void;
+  isClicked: boolean
+  handleUnlock: () => void
 }) => {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("")
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+    setPassword(e.target.value)
     if (e.target.value.length >= 4) {
-      handleUnlock();
+      handleUnlock()
     }
-  };
+  }
   return (
     <div
       className={twMerge(
         "relative h-full w-full",
-        isClicked ? "opacity-100" : "opacity-0",
+        isClicked ? "opacity-100" : "opacity-0"
       )}
     >
       <div
         className={twMerge(
           "relative z-10 flex h-full w-full items-center justify-center backdrop-blur-none transition duration-1000",
-          isClicked ? "backdrop-blur-md" : "backdrop-blur-0",
+          isClicked ? "backdrop-blur-md" : "backdrop-blur-0"
         )}
       >
         <div className="absolute left-1/2 top-[calc(50%-2.5rem)] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center">
@@ -61,7 +61,7 @@ const LockScreenPasswordScreen = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LockScreenPasswordScreen;
+export default LockScreenPasswordScreen

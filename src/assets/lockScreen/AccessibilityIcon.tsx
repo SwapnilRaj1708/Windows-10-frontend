@@ -37,7 +37,7 @@ const AccessibilityIcon = () => {
         fill="white"
       />
     </svg>
-  );
-};
+  )
+}
 
-export default AccessibilityIcon;
+export default AccessibilityIcon

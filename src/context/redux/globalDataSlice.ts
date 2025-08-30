@@ -1,175 +1,170 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import { AppDispatch, IRootState } from "@/app/store"
+import {
+  CHROME_ICON,
+  FILE_EXPLORE_ICON,
+  FOLDER_ICON,
+  PDF_ICON,
+  THIS_PC_ICON
+} from "@/assets/assets"
+import { closeDisplay, openDisplay } from "./displaySlice"
 
-export type GlobalDataType = "folder" | "file";
+export type GlobalDataType = "folder" | "file" | "file-link"
 
 export interface IGlobalDataCommon {
-  id: string;
-  name: string;
-  icon: string;
-  taskbarIcon: string;
-  isOpened: boolean;
-  isFocused: boolean;
-  isPinnedToTaskbar: boolean;
-  isDesktopIconSelected: boolean;
+  id: string
+  name: string
+  icon: string
+  taskbarIcon: string
+  isFocused: boolean
+  parent: string
+  isOpened: boolean
 }
 
 export interface IGlobalDataFolder extends IGlobalDataCommon {
-  type: "folder";
-  children?: IGlobalData[] | [];
+  type: "folder"
+  children: string[]
+  url?: never
 }
 
 export interface IGlobalDataFile extends IGlobalDataCommon {
-  type: "file";
-  children?: never;
+  type: "file"
+  children?: never
+  url?: string
 }
 
-export type IGlobalData = IGlobalDataFolder | IGlobalDataFile;
+export interface IGlobalDataFileLink extends IGlobalDataCommon {
+  type: "file-link"
+  children?: never
+  url: string
+}
 
-type InitialState = {
-  data: IGlobalData[];
-};
+export type GlobalDataItem =
+  | IGlobalDataFolder
+  | IGlobalDataFile
+  | IGlobalDataFileLink
 
-const defaultValues: InitialState = {
-  data: [
-    {
-      type: "folder",
-      id: "this-pc-folder",
-      name: "This PC",
-      icon: "src/assets/icons/this-pc.png",
-      taskbarIcon: "src/assets/icons/file-explorer.png",
-      children: [
-        {
-          type: "file",
-          id: "resume-file",
-          name: "Resume",
-          icon: "src/assets/icons/pdf.png",
-          taskbarIcon: "src/assets/icons/file-explorer.png",
-          isOpened: false,
-          isFocused: false,
-          isPinnedToTaskbar: false,
-          isDesktopIconSelected: false,
-        },
-      ],
-      isOpened: false,
-      isFocused: false,
-      isPinnedToTaskbar: false,
-      isDesktopIconSelected: false,
-    },
-    {
-      type: "folder",
-      id: "resume-folder",
-      name: "Resume",
-      icon: "src/assets/icons/folder.png",
-      taskbarIcon: "src/assets/icons/file-explorer.png",
-      children: [
-        {
-          type: "file",
-          id: "resume-file",
-          name: "Resume",
-          icon: "src/assets/icons/pdf.png",
-          taskbarIcon: "src/assets/icons/file-explorer.png",
-          isOpened: false,
-          isFocused: false,
-          isPinnedToTaskbar: false,
-          isDesktopIconSelected: false,
-        },
-      ],
-      isOpened: false,
-      isFocused: false,
-      isPinnedToTaskbar: false,
-      isDesktopIconSelected: false,
-    },
-    {
-      type: "folder",
-      id: "folder-3",
-      name: "Folder 3",
-      icon: "src/assets/icons/folder.png",
-      taskbarIcon: "src/assets/icons/file-explorer.png",
-      children: [],
-      isOpened: false,
-      isFocused: false,
-      isPinnedToTaskbar: false,
-      isDesktopIconSelected: false,
-    },
-  ],
-};
+export type GlobalData = Record<string, GlobalDataItem>
 
-const initialState: InitialState = defaultValues;
+// NOTE: Each value in globalData must a individual identity before being added as a children or a parent.
+const defaultValues: GlobalData = {
+  "this-pc-folder": {
+    id: "this-pc-folder",
+    type: "folder",
+    name: "This PC",
+    icon: THIS_PC_ICON,
+    taskbarIcon: FILE_EXPLORE_ICON,
+    isOpened: false,
+    isFocused: false,
+    children: ["resume-folder"],
+    parent: ""
+  },
+  "resume-folder": {
+    id: "resume-folder",
+    type: "folder",
+    name: "Resume",
+    icon: FOLDER_ICON,
+    taskbarIcon: FILE_EXPLORE_ICON,
+    isOpened: false,
+    isFocused: false,
+    children: ["resume-file"],
+    parent: "this-pc-folder"
+  },
+  "resume-file": {
+    id: "resume-file",
+    type: "file",
+    name: "Resume",
+    icon: PDF_ICON,
+    taskbarIcon: PDF_ICON,
+    isOpened: false,
+    isFocused: false,
+    parent: "resume-folder",
+    url: "https://drive.google.com/file/d/1gaepCoxAr6KRVMysEyee7dugIz-LjYf6/preview?usp=sharing"
+  },
+  "projects-folder": {
+    id: "projects",
+    type: "folder",
+    name: "Projects",
+    icon: FOLDER_ICON,
+    taskbarIcon: FILE_EXPLORE_ICON,
+    isOpened: false,
+    isFocused: false,
+    parent: "this-pc-folder",
+    children: ["e-commerce-website-file-link"]
+  },
+  "e-commerce-website-file-link": {
+    id: "e-commerce-website-file-link",
+    type: "file-link",
+    name: "E-commerce Website",
+    icon: CHROME_ICON,
+    taskbarIcon: CHROME_ICON,
+    isOpened: false,
+    isFocused: false,
+    parent: "projects-folder",
+    url: "https://minimalistic-e-commerce.vercel.app/"
+  }
+}
+
+const initialState = defaultValues
 
 export const globalDataSlice = createSlice({
   name: "globalData",
   initialState,
   reducers: {
-    setOpen: (state, action: PayloadAction<{ id: string }>) => {
-      const { id } = action.payload;
-      state.data.forEach((item) => {
-        item.isFocused = false;
-        if (item.id === id) {
-          item.isOpened = true;
-          item.isFocused = true;
-        }
-      });
+    openItem: (state, action: PayloadAction<{ id: string }>) => {
+      const { id } = action.payload
+      state[id].isOpened = true
+      state[id].isFocused = true
     },
 
-    setClose: (state, action: PayloadAction<{ id: string }>) => {
-      const { id } = action.payload;
-      state.data.forEach((item) => {
-        if (item.id === id) {
-          item.isOpened = false;
-          item.isFocused = false;
-        }
-      });
+    closeItem: (state, action: PayloadAction<{ id: string }>) => {
+      const { id } = action.payload
+      state[id].isOpened = false
+      state[id].isFocused = false
     },
 
-    setFocus: (state, action: PayloadAction<{ id: string }>) => {
-      const { id } = action.payload;
-      state.data.forEach((item) => {
-        item.isFocused = item.id === id;
-      });
+    focusItem: (state, action: PayloadAction<{ id: string }>) => {
+      const { id } = action.payload
+      state[id].isFocused = true
     },
 
-    setUnfocus: (state, action: PayloadAction<{ id: string }>) => {
-      const { id } = action.payload;
-      state.data.forEach((item) => {
-        if (item.id === id) {
-          item.isFocused = false;
-        }
-      });
+    unfocusItem: (state, action: PayloadAction<{ id: string }>) => {
+      const { id } = action.payload
+      state[id].isFocused = false
     },
 
-    setDesktopIconSelected: (state, action: PayloadAction<{ id: string }>) => {
-      const { id } = action.payload;
-      state.data.forEach((item) => {
-        item.isDesktopIconSelected = item.id === id;
-      });
-    },
+    resetGlobalDataSlice: state => {
+      Object.assign(state, defaultValues)
+    }
+  }
+})
 
-    setDesktopIconUnselected: (
-      state,
-      action: PayloadAction<{ id: string }>,
-    ) => {
-      const { id } = action.payload;
-      state.data.forEach((item) => {
-        if (item.id === id) {
-          item.isDesktopIconSelected = false;
-        }
-      });
-    },
+export const openItemThunk =
+  ({ id }: { id: string }) =>
+  (dispatch: AppDispatch, getState: () => IRootState) => {
+    const item = getState().globalData[id]
+    if (!item) return
+    if (item.type === "file-link") {
+      window.open(item.url, "_blank")
+    } else {
+      dispatch(openItem({ id }))
+      dispatch(openDisplay({ id, item }))
+    }
+  }
 
-    resetGlobalDataSlice: (state) => {
-      Object.assign(state, defaultValues);
-    },
-  },
-});
+export const closeItemThunk =
+  ({ id }: { id: string }) =>
+  (dispatch: AppDispatch) => {
+    dispatch(closeItem({ id }))
+    dispatch(closeDisplay({ id }))
+  }
 
 export const {
-  setOpen,
-  setClose,
-  setFocus,
-  setUnfocus,
-  setDesktopIconSelected,
-  setDesktopIconUnselected,
-  resetGlobalDataSlice,
-} = globalDataSlice.actions;
+  openItem,
+  closeItem,
+  focusItem,
+  unfocusItem,
+  resetGlobalDataSlice
+} = globalDataSlice.actions
 
-export default globalDataSlice.reducer;
+export default globalDataSlice.reducer

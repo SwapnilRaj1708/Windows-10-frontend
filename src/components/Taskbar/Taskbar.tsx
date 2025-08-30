@@ -1,37 +1,32 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import WindowsStartButton from "./WindowsStartButton";
-import { motion } from "motion/react";
-import { IRootState } from "@/app/store";
-import { twMerge } from "tailwind-merge";
-import WindowsStartMenu from "./WindowsStartMenu";
-import NotificationIcon from "./NotificationIcon";
-import { setOpen } from "@/context/redux/globalDataSlice";
-import { openFolder } from "@/context/redux/folderSlice";
+import { motion } from "motion/react"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { twMerge } from "tailwind-merge"
+import type { IRootState } from "@/app/store"
+import { openItem } from "@/context/redux/globalDataSlice"
+import NotificationIcon from "./NotificationIcon"
+import WindowsStartButton from "./WindowsStartButton"
+import WindowsStartMenu from "./WindowsStartMenu"
 
 //function to display the current time as 21:30 format (24 hour format) with both hours and minutes padded with 0 if they are single digit
 const getTime = () => {
-  const date = new Date();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  return `${hours < 10 ? "0" + hours : hours}:${
-    minutes < 10 ? "0" + minutes : minutes
-  }`;
-};
+  const date = new Date()
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  return `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}`
+}
 
 //function to display the current date as 21-07-2023 format with both day, month and year padded with 0 if they are single digit
 const getDate = () => {
-  const date = new Date();
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  return `${day < 10 ? "0" + day : day}-${
-    month < 10 ? "0" + month : month
-  }-${year}`;
-};
+  const date = new Date()
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
+  return `${day < 10 ? `0${day}` : day}-${month < 10 ? `0${month}` : month}-${year}`
+}
 
 const TaskbarInput = () => {
-  const [searchInput, setSearchInput] = useState<string>("");
+  const [searchInput, setSearchInput] = useState<string>("")
   return (
     <input
       type="text"
@@ -39,40 +34,31 @@ const TaskbarInput = () => {
       placeholder="Type here to search"
       name="searchInput"
       value={searchInput}
-      onChange={(e) => setSearchInput(e.target.value)}
+      onChange={e => setSearchInput(e.target.value)}
       onBlur={() => setSearchInput("")}
     />
-  );
-};
+  )
+}
 
-const TaskbarIcon = ({
-  id,
-  taskbarIcon,
-  name,
-  isFocused,
-  isOpened,
-}: {
-  id: string;
-  taskbarIcon: string;
-  name: string;
-  isFocused: boolean;
-  isOpened: boolean;
-}) => {
-  const dispatch = useDispatch();
+const TaskbarIcon = ({ id }: { id: string }) => {
+  const dispatch = useDispatch()
+  const { taskbarIcon, name, isFocused, isOpened } = useSelector(
+    (state: IRootState) => state.globalData[id]
+  )
 
   const handleClick = () => {
     if (!isOpened) {
-      dispatch(setOpen({ id }));
-      dispatch(openFolder({ id }));
+      dispatch(openItem({ id }))
     }
-  };
+  }
 
   return (
     <button
+      type="button"
       className={twMerge(
         "group relative flex h-full w-12 cursor-default items-center justify-center duration-75 hover:bg-[rgb(var(--taskbar-icon-background-color-hover))] active:bg-[rgb(var(--taskbar-icon-background-color-active))]",
         isFocused &&
-          "bg-[rgb(var(--taskbar-active-app-background-color))] hover:bg-[rgb(var(--taskbar-active-app-background-color-hover))] active:bg-[rgb(var(--taskbar-active-app-background-color-active))]",
+          "bg-[rgb(var(--taskbar-active-app-background-color))] hover:bg-[rgb(var(--taskbar-active-app-background-color-hover))] active:bg-[rgb(var(--taskbar-active-app-background-color-active))]"
       )}
       onClick={handleClick}
     >
@@ -85,44 +71,35 @@ const TaskbarIcon = ({
         <div
           className={twMerge(
             "absolute bottom-0 h-[0.125rem] w-10/12 bg-[rgb(var(--taskbar-active-app-stroke-color))] duration-75 ease-in-out group-hover:w-full",
-            isFocused && "w-full",
+            isFocused && "w-full"
           )}
-        ></div>
+        />
       )}
     </button>
-  );
-};
+  )
+}
 
 export default function Taskbar() {
-  const [time, setTime] = useState<string>(getTime());
-  const [date, setDate] = useState<string>(getDate());
+  const [time, setTime] = useState<string>(getTime())
+  const [date, setDate] = useState<string>(getDate())
   // const dispatch = useDispatch();
   const isWindowsStartMenuOpen = useSelector(
-    (state: IRootState) => state.windowsStartMenu.isWindowsStartMenuOpen,
-  );
-  const taskbarIcons = useSelector((state: IRootState) =>
-    state.globalData.data.map((item) => ({
-      id: item.id,
-      name: item.name,
-      icon: item.icon,
-      taskbarIcon: item.taskbarIcon,
-      isOpened: item.isOpened,
-      isFocused: item.isFocused,
-    })),
-  );
+    (state: IRootState) => state.windowsStartMenu.isWindowsStartMenuOpen
+  )
+  const taskbarIcons = useSelector((state: IRootState) => state.taskbar)
 
   //set the time and date to the current time and date using the getTime and getDate functions using the setInterval function to update the time and date every second in useEffect
 
   useEffect(() => {
     const timeAndDate = setInterval(() => {
-      setTime(getTime());
-      setDate(getDate());
-    }, 1000);
+      setTime(getTime())
+      setDate(getDate())
+    }, 1000)
 
     return () => {
-      clearInterval(timeAndDate);
-    };
-  }, []);
+      clearInterval(timeAndDate)
+    }
+  }, [])
 
   return (
     <>
@@ -141,7 +118,7 @@ export default function Taskbar() {
           height: "40rem",
           width: "40.5rem",
           background: "rgb(var(--windows-start-menu-background-color))",
-          display: isWindowsStartMenuOpen ? "flex" : "none",
+          display: isWindowsStartMenuOpen ? "flex" : "none"
         }}
       >
         <WindowsStartMenu />
@@ -151,22 +128,28 @@ export default function Taskbar() {
           <WindowsStartButton />
           <TaskbarInput />
           <div className="flex h-full flex-row gap-[0.0625rem]">
-            {taskbarIcons.map((icon) => (
-              <TaskbarIcon key={icon.id} {...icon} />
+            {taskbarIcons.map(icon => (
+              <TaskbarIcon key={icon} id={icon} />
             ))}
           </div>
         </div>
         <div className="flex h-full flex-row items-end">
-          <button className="flex h-full w-[4.375rem] cursor-default flex-col items-center justify-center gap-[.15rem] text-xs font-normal text-white duration-75 hover:bg-[rgb(var(--taskbar-icon-background-color-hover))] active:bg-[rgb(var(--taskbar-icon-background-color-active))]">
+          <button
+            type="button"
+            className="flex h-full w-[4.375rem] cursor-default flex-col items-center justify-center gap-[.15rem] text-xs font-normal text-white duration-75 hover:bg-[rgb(var(--taskbar-icon-background-color-hover))] active:bg-[rgb(var(--taskbar-icon-background-color-active))]"
+          >
             <span className="text-xs">{time}</span>
             <span className="text-xs">{date}</span>
           </button>
-          <button className="flex h-full w-[2.5rem] cursor-default items-center justify-center duration-75 hover:bg-[rgb(var(--taskbar-icon-background-color-hover))] active:bg-[rgb(var(--taskbar-icon-background-color-active))]">
+          <button
+            type="button"
+            className="flex h-full w-[2.5rem] cursor-default items-center justify-center duration-75 hover:bg-[rgb(var(--taskbar-icon-background-color-hover))] active:bg-[rgb(var(--taskbar-icon-background-color-active))]"
+          >
             <NotificationIcon />
           </button>
-          <div className="ml-2 h-full w-[.3rem] cursor-default border-0 border-l border-[rgb(var(--taskbar-icon-outline-color))] hover:bg-[rgb(var(--taskbar-icon-background-color-hover))] active:bg-[rgb(var(--taskbar-icon-background-color-active))]"></div>
+          <div className="ml-2 h-full w-[.3rem] cursor-default border-0 border-l border-[rgb(var(--taskbar-icon-outline-color))] hover:bg-[rgb(var(--taskbar-icon-background-color-hover))] active:bg-[rgb(var(--taskbar-icon-background-color-active))]" />
         </div>
       </footer>
     </>
-  );
+  )
 }

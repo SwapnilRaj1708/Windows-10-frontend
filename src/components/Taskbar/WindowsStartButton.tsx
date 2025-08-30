@@ -1,13 +1,13 @@
-import { toggleWindowsStartMenuOpen } from "@/context/redux/windowsStartMenuSlice";
-import { IoLogoWindows } from "react-icons/io";
-import { useDispatch } from "react-redux";
+import { IoLogoWindows } from "react-icons/io"
+import { useDispatch } from "react-redux"
+import { toggleWindowsStartMenuOpen } from "@/context/redux/windowsStartMenuSlice"
 
 const WindowsStartButton = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleClick = () => {
-    dispatch(toggleWindowsStartMenuOpen());
-  };
+    dispatch(toggleWindowsStartMenuOpen())
+  }
 
   return (
     <button
@@ -17,7 +17,7 @@ const WindowsStartButton = () => {
     >
       <IoLogoWindows className="start-icon icon-image h-[1.25rem] w-[1.25rem] text-[rgb(var(--taskbar-icon-color))] group-hover:text-[rgb(var(--accent-color))]" />
     </button>
-  );
-};
+  )
+}
 
-export default WindowsStartButton;
+export default WindowsStartButton

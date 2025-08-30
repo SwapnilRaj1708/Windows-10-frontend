@@ -1,30 +1,30 @@
-import { GiPowerButton } from "react-icons/gi";
-import { GoPerson } from "react-icons/go";
-import { IoIosMenu } from "react-icons/io";
-import { LiaFile } from "react-icons/lia";
-import { PiGear, PiImageLight } from "react-icons/pi";
-import fileExplorerIcon from "../../assets/icons/file-explorer.png";
-import { setWindowsStartMenuClose } from "@/context/redux/windowsStartMenuSlice";
-import { useDispatch } from "react-redux";
-import { useEffect, useRef } from "react";
-import { setIsLocked } from "@/context/redux/lockScreenSlice";
+import { useEffect, useRef } from "react"
+import { GiPowerButton } from "react-icons/gi"
+import { GoPerson } from "react-icons/go"
+import { IoIosMenu } from "react-icons/io"
+import { LiaFile } from "react-icons/lia"
+import { PiGear, PiImageLight } from "react-icons/pi"
+import { useDispatch } from "react-redux"
+import fileExplorerIcon from "@/assets/icons/file-explorer.png"
+import { setIsLocked } from "@/context/redux/lockScreenSlice"
+import { setWindowsStartMenuClose } from "@/context/redux/windowsStartMenuSlice"
 
 const Sidebar = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex h-full w-fit flex-col justify-between px-[0.0625rem]">
       {children}
     </div>
-  );
-};
+  )
+}
 
 const SidebarButton = ({
   children,
   title,
-  onClick,
+  onClick
 }: {
-  children: React.ReactNode;
-  title: string;
-  onClick?: () => void;
+  children: React.ReactNode
+  title: string
+  onClick?: () => void
 }) => {
   return (
     <div
@@ -34,8 +34,8 @@ const SidebarButton = ({
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
 const AllApps = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -43,32 +43,32 @@ const AllApps = ({ children }: { children: React.ReactNode }) => {
       className="flex h-full w-[16.9375rem] flex-col gap-[0.3125rem] pl-[0.75rem] pr-[0.0625rem] pt-[0.4375rem]"
       style={{
         scrollbarGutter: "stable",
-        scrollbarWidth: "thin",
+        scrollbarWidth: "thin"
       }}
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
 const AllAppsItemTitle = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-xs text-white">{children}</p>;
-};
+  return <p className="text-xs text-white">{children}</p>
+}
 
 const AllAppsItemImage = ({ src, alt }: { src: string; alt: string }) => {
   return (
     <img className="aspect-square w-6 object-contain" src={src} alt={alt} />
-  );
-};
+  )
+}
 
 const AllAppsItem = ({
   children,
   title,
-  noHover,
+  noHover
 }: {
-  children: React.ReactNode;
-  title?: string;
-  noHover?: boolean;
+  children: React.ReactNode
+  title?: string
+  noHover?: boolean
 }) => {
   return (
     <div
@@ -81,8 +81,8 @@ const AllAppsItem = ({
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
 const CategoriesSection = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -90,37 +90,37 @@ const CategoriesSection = ({ children }: { children: React.ReactNode }) => {
       className="flex h-full w-[20.5625rem] flex-col gap-[0.6875rem] pl-[0.3125rem] pr-1 pt-5"
       style={{
         scrollbarGutter: "stable",
-        scrollbarWidth: "thin",
+        scrollbarWidth: "thin"
       }}
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
 const Category = ({ children }: { children: React.ReactNode }) => {
-  return <div className="flex w-full flex-col gap-[0.8125rem]">{children}</div>;
-};
+  return <div className="flex w-full flex-col gap-[0.8125rem]">{children}</div>
+}
 
 const CategoryTitle = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-xs font-normal text-white">{children}</p>;
-};
+  return <p className="text-xs font-normal text-white">{children}</p>
+}
 
 const CategoryTilesContainer = ({
-  children,
+  children
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) => {
-  return <div className="flex flex-row flex-wrap gap-1">{children}</div>;
-};
+  return <div className="flex flex-row flex-wrap gap-1">{children}</div>
+}
 
 const CategoryTile = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex h-[6.25rem] w-[6.25rem] items-center justify-center border-2 border-transparent bg-[rgb(var(--start-menu-category-tiles-background-color))] hover:border-[rgb(var(--start-menu-category-tiles-hover-border-color))] hover:bg-[rgb(var(--start-menu-category-tiles-hover-background-color))] active:bg-[rgb(var(--gray-color-active))]">
       {children}
     </div>
-  );
-};
+  )
+}
 
 const CategoryTileImage = ({ src, alt }: { src: string; alt: string }) => {
   return (
@@ -129,38 +129,38 @@ const CategoryTileImage = ({ src, alt }: { src: string; alt: string }) => {
       src={src}
       alt={alt}
     />
-  );
-};
+  )
+}
 
 const WindowsStartMenu = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleCloseWindowsStartMenu = () => {
-      dispatch(setWindowsStartMenuClose());
-    };
+      dispatch(setWindowsStartMenuClose())
+    }
     const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
+      const target = event.target as HTMLElement
       if (
         menuRef.current &&
         !menuRef.current.contains(target) &&
         !target.closest("#windows-start-button")
       ) {
-        handleCloseWindowsStartMenu();
+        handleCloseWindowsStartMenu()
       }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
+    }
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dispatch]);
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [dispatch])
 
   const handlePowerButtonClick = () => {
-    dispatch(setIsLocked(true));
-    dispatch(setWindowsStartMenuClose());
-  };
+    dispatch(setIsLocked(true))
+    dispatch(setWindowsStartMenuClose())
+  }
 
   return (
     <article ref={menuRef} className="flex h-full w-full flex-row">
@@ -251,7 +251,7 @@ const WindowsStartMenu = () => {
         </Category>
       </CategoriesSection>
     </article>
-  );
-};
+  )
+}
 
-export default WindowsStartMenu;
+export default WindowsStartMenu
