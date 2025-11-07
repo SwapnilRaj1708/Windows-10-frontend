@@ -28,10 +28,7 @@ export const displaySlice = createSlice({
   name: "display",
   initialState,
   reducers: {
-    openDisplay: (
-      state,
-      action: PayloadAction<{ id: string; item: GlobalDataItem }>
-    ) => {
+    openDisplay: (state, action: PayloadAction<{ id: string }>) => {
       const { id } = action.payload
 
       // Check if display is already open
@@ -47,19 +44,18 @@ export const displaySlice = createSlice({
       // Generate random offset between 80-150px
       const randomOffset = () => Math.floor(Math.random() * 70) + 80
 
-      const item = action.payload.item
-      if (!item) return
-
       // Create a new display with the next available z-index
+      const xOffset = randomOffset()
+      const yOffset = randomOffset()
       const newDisplay: IDisplay = {
         id,
-        position: { x: randomOffset(), y: randomOffset() },
+        position: { x: xOffset, y: yOffset },
         size: { width: 640, height: 640 },
         zIndex: state.nextZIndex,
         isMaximized: false,
         prevState: {
           size: { width: 640, height: 640 },
-          position: { x: randomOffset(), y: randomOffset() }
+          position: { x: xOffset, y: yOffset }
         }
       }
 

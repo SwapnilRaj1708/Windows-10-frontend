@@ -4,7 +4,8 @@ const defaultValues: string[] = [
   "this-pc-folder",
   "resume-folder",
   "resume-file",
-  "projects-folder"
+  "projects-folder",
+  "experience-folder"
 ]
 
 const initialState = defaultValues

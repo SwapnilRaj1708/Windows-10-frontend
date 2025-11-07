@@ -2,8 +2,8 @@ import { motion } from "motion/react"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { twMerge } from "tailwind-merge"
-import type { IRootState } from "@/app/store"
-import { openItem } from "@/context/redux/globalDataSlice"
+import type { AppDispatch, IRootState } from "@/app/store"
+import { openItemThunk } from "@/context/redux/globalDataSlice"
 import NotificationIcon from "./NotificationIcon"
 import WindowsStartButton from "./WindowsStartButton"
 import WindowsStartMenu from "./WindowsStartMenu"
@@ -41,14 +41,14 @@ const TaskbarInput = () => {
 }
 
 const TaskbarIcon = ({ id }: { id: string }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const { taskbarIcon, name, isFocused, isOpened } = useSelector(
     (state: IRootState) => state.globalData[id]
   )
 
   const handleClick = () => {
     if (!isOpened) {
-      dispatch(openItem({ id }))
+      dispatch(openItemThunk({ id }))
     }
   }
 

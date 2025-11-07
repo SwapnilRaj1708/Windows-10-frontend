@@ -7,7 +7,7 @@ type InitialState = {
 
 const defaultValues: InitialState = {
   initialLoad: true,
-  isLocked: !true
+  isLocked: false
 }
 
 const initialState: InitialState = defaultValues
