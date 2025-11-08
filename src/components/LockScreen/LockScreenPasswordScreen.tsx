@@ -14,7 +14,7 @@ const LockScreenPasswordScreen = ({
 }) => {
   const [password, setPassword] = useState("")
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
+    setPassword(e.target.value.trim().slice(0, 4))
     if (e.target.value.length >= 4) {
       handleUnlock()
     }
@@ -29,7 +29,7 @@ const LockScreenPasswordScreen = ({
       <div
         className={twMerge(
           "relative z-10 flex h-full w-full items-center justify-center backdrop-blur-none transition duration-1000",
-          isClicked ? "backdrop-blur-md" : "backdrop-blur-0"
+          isClicked ? "backdrop-blur-xl" : "backdrop-blur-0"
         )}
       >
         <div className="absolute left-1/2 top-[calc(50%-2.5rem)] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center">
@@ -48,7 +48,7 @@ const LockScreenPasswordScreen = ({
               value={password}
               onChange={handlePasswordChange}
               onBlur={() => setPassword("")}
-              autoComplete="current-password"
+              autoComplete="off"
               autoFocus
             />
           )}
