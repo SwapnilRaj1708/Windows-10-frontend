@@ -1,18 +1,21 @@
 import { ChevronRight } from "lucide-react"
 import { Dispatch, SetStateAction } from "react"
+import { twMerge } from "tailwind-merge"
 
 const ContextMenuItem = ({
   item,
   setVisible
 }: {
   item: {
-    label?: string
+    label?: React.ReactNode
     icon?: string
     onClick?: () => void
+    disabled?: boolean
     children?: {
-      label?: string
+      label?: React.ReactNode
       icon?: string
       onClick?: () => void
+      disabled?: boolean
     }[]
   }
   setVisible: Dispatch<SetStateAction<boolean>>
@@ -22,6 +25,7 @@ const ContextMenuItem = ({
   return (
     <div className="relative">
       <button
+        disabled={item.disabled}
         onClick={e => {
           //   setIsChildrenMenuOpen(true);
           e.stopPropagation()
@@ -30,7 +34,12 @@ const ContextMenuItem = ({
             setVisible(false)
           }
         }}
-        className="relative flex h-[1.375rem] w-full items-center justify-between gap-2 bg-transparent pl-2 pr-[0.25rem] text-sm hover:bg-[rgb(var(--context-menu-item-hover-background-color))]"
+        className={twMerge(
+          "relative flex h-[1.375rem] w-full items-center justify-between gap-2 bg-transparent pl-2 pr-[0.25rem] text-sm",
+          item.disabled
+            ? "cursor-not-allowed"
+            : "hover:bg-[rgb(var(--context-menu-item-hover-background-color))]"
+        )}
       >
         <div className="flex items-center gap-2">
           <span className="h-4 w-4">

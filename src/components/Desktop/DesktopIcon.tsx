@@ -61,13 +61,15 @@ export default function DesktopIcon({ id }: { id: string }) {
 
   return (
     <button
+      id={`desktop-icon-${id}`}
+      data-id={id}
       ref={buttonRef}
       onMouseDown={handleMouseDown}
       onDoubleClick={handleDoubleClick}
       onKeyDown={handleKeyDown}
       type="button"
       className={twMerge(
-        "flex w-[var(--desktop-icon-width)] cursor-default flex-col items-center justify-center gap-0.5 p-[0.1875rem] outline-1 outline-offset-[-2px] outline-[rgb(var(--desktop-icon-hover-outline-color))] hover:bg-[rgb(var(--desktop-icon-hover-background-color))] hover:outline",
+        "desktop-icon flex w-[var(--desktop-icon-width)] cursor-default flex-col items-center justify-center gap-0.5 p-[0.1875rem] outline-1 outline-offset-[-2px] outline-[rgb(var(--desktop-icon-hover-outline-color))] hover:bg-[rgb(var(--desktop-icon-hover-background-color))] hover:outline",
         isSelected &&
           "bg-[rgb(var(--desktop-icon-selected-background-color))] outline outline-[rgb(var(--desktop-icon-selected-outline-color))] hover:bg-[rgb(var(--desktop-icon-selected-hover-background-color))] hover:outline-[rgb(var(--desktop-icon-selected-hover-outline-color))]"
       )}
