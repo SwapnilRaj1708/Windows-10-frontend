@@ -14,6 +14,10 @@ import {
   TWIZZR_ICON
 } from "@/assets/assets"
 import { closeDisplay, openDisplay } from "./displaySlice"
+import {
+  addItemToTaskbarSequence,
+  removeItemFromTaskbarSequence
+} from "./taskbarSlice"
 
 export const enum GlobalDataType {
   FOLDER = "folder",
@@ -26,6 +30,7 @@ export interface IGlobalDataCommon {
   name: string
   icon: string
   taskbarIcon: string
+  isPinnedToTaskbar: boolean
   isFocused: boolean
   parent: string
   isOpened: boolean
@@ -64,6 +69,7 @@ const defaultValues: GlobalData = {
     name: "This PC",
     icon: THIS_PC_ICON,
     taskbarIcon: FILE_EXPLORE_ICON,
+    isPinnedToTaskbar: true,
     isOpened: false,
     isFocused: false,
     children: ["resume-file", "projects-folder", "experience-folder"],
@@ -75,6 +81,7 @@ const defaultValues: GlobalData = {
     name: "Resume",
     icon: FOLDER_ICON,
     taskbarIcon: FILE_EXPLORE_ICON,
+    isPinnedToTaskbar: true,
     isOpened: false,
     isFocused: false,
     children: ["resume-file"],
@@ -86,6 +93,7 @@ const defaultValues: GlobalData = {
     name: "Resume",
     icon: PDF_ICON,
     taskbarIcon: PDF_ICON,
+    isPinnedToTaskbar: false,
     isOpened: false,
     isFocused: false,
     parent: "resume-folder",
@@ -97,6 +105,7 @@ const defaultValues: GlobalData = {
     name: "Projects",
     icon: FOLDER_ICON,
     taskbarIcon: FILE_EXPLORE_ICON,
+    isPinnedToTaskbar: false,
     isOpened: false,
     isFocused: false,
     parent: "this-pc-folder",
@@ -112,6 +121,7 @@ const defaultValues: GlobalData = {
     name: "E-commerce Website",
     icon: CHROME_ICON,
     taskbarIcon: CHROME_ICON,
+    isPinnedToTaskbar: false,
     isOpened: false,
     isFocused: false,
     parent: "projects-folder",
@@ -123,6 +133,7 @@ const defaultValues: GlobalData = {
     name: "Creo Website",
     icon: CREO_ICON,
     taskbarIcon: CREO_ICON,
+    isPinnedToTaskbar: false,
     isOpened: false,
     isFocused: false,
     parent: "projects-folder",
@@ -134,6 +145,7 @@ const defaultValues: GlobalData = {
     name: "Trello clone",
     icon: TRELLO_ICON,
     taskbarIcon: TRELLO_ICON,
+    isPinnedToTaskbar: false,
     isOpened: false,
     isFocused: false,
     parent: "projects-folder",
@@ -145,6 +157,7 @@ const defaultValues: GlobalData = {
     name: "Experiences",
     icon: FOLDER_ICON,
     taskbarIcon: FILE_EXPLORE_ICON,
+    isPinnedToTaskbar: false,
     isOpened: false,
     isFocused: false,
     children: [
@@ -161,6 +174,7 @@ const defaultValues: GlobalData = {
     name: "engineerHUB",
     icon: ENGINEERHUB_ICON,
     taskbarIcon: ENGINEERHUB_ICON,
+    isPinnedToTaskbar: false,
     isOpened: false,
     isFocused: false,
     parent: "experience-folder",
@@ -172,6 +186,7 @@ const defaultValues: GlobalData = {
     name: "Softboard Lite",
     icon: SOFTBOARD_LITE_ICON,
     taskbarIcon: SOFTBOARD_LITE_ICON,
+    isPinnedToTaskbar: false,
     isOpened: false,
     isFocused: false,
     parent: "experience-folder",
@@ -183,6 +198,7 @@ const defaultValues: GlobalData = {
     name: "EL Nova Labs",
     icon: EL_NOVA_LABS_ICON,
     taskbarIcon: EL_NOVA_LABS_ICON,
+    isPinnedToTaskbar: false,
     isOpened: false,
     isFocused: false,
     parent: "experience-folder",
@@ -194,6 +210,7 @@ const defaultValues: GlobalData = {
     name: "Twizzr",
     icon: TWIZZR_ICON,
     taskbarIcon: TWIZZR_ICON,
+    isPinnedToTaskbar: false,
     isOpened: false,
     isFocused: false,
     parent: "experience-folder",
@@ -229,6 +246,16 @@ export const globalDataSlice = createSlice({
       state[id].isFocused = false
     },
 
+    pinItemToTaskbar: (state, action: PayloadAction<{ id: string }>) => {
+      const { id } = action.payload
+      state[id].isPinnedToTaskbar = true
+    },
+
+    unpinItemFromTaskbar: (state, action: PayloadAction<{ id: string }>) => {
+      const { id } = action.payload
+      state[id].isPinnedToTaskbar = false
+    },
+
     resetGlobalDataSlice: state => {
       Object.assign(state, defaultValues)
     }
@@ -245,6 +272,7 @@ export const openItemThunk =
     } else {
       dispatch(openItem({ id }))
       dispatch(openDisplay({ id }))
+      dispatch(addItemToTaskbarSequence({ id }))
     }
   }
 
@@ -253,6 +281,7 @@ export const closeItemThunk =
   (dispatch: AppDispatch) => {
     dispatch(closeItem({ id }))
     dispatch(closeDisplay({ id }))
+    dispatch(removeItemFromTaskbarSequence({ id }))
   }
 
 export const {

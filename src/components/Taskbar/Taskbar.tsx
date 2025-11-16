@@ -87,6 +87,9 @@ export default function Taskbar() {
     (state: IRootState) => state.windowsStartMenu.isWindowsStartMenuOpen
   )
   const taskbarIcons = useSelector((state: IRootState) => state.taskbar)
+  const pinnedTaskbarIconIds = useSelector(
+    (state: IRootState) => state.pinnedTaskbar
+  )
 
   //set the time and date to the current time and date using the getTime and getDate functions using the setInterval function to update the time and date every second in useEffect
 
@@ -128,9 +131,14 @@ export default function Taskbar() {
           <WindowsStartButton />
           <TaskbarInput />
           <div className="flex h-full flex-row gap-[0.0625rem]">
-            {taskbarIcons.map(icon => (
+            {pinnedTaskbarIconIds.map(icon => (
               <TaskbarIcon key={icon} id={icon} />
             ))}
+            {taskbarIcons.map(icon =>
+              pinnedTaskbarIconIds.includes(icon) ? null : (
+                <TaskbarIcon key={icon} id={icon} />
+              )
+            )}
           </div>
         </div>
         <div className="flex h-full flex-row items-end">
