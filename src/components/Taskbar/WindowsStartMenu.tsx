@@ -5,7 +5,7 @@ import { IoIosMenu } from "react-icons/io"
 import { LiaFile } from "react-icons/lia"
 import { PiGear, PiImageLight } from "react-icons/pi"
 import { useDispatch } from "react-redux"
-import fileExplorerIcon from "@/assets/icons/file-explorer.png"
+import { FILE_EXPLORE_ICON } from "@/assets/assets"
 import { setIsLocked } from "@/context/redux/lockScreenSlice"
 import { setWindowsStartMenuClose } from "@/context/redux/windowsStartMenuSlice"
 
@@ -193,18 +193,18 @@ const WindowsStartMenu = () => {
           <AllAppsItemTitle>C</AllAppsItemTitle>
         </AllAppsItem>
         <AllAppsItem title="Calculator">
-          <AllAppsItemImage src={fileExplorerIcon} alt="file-explorer" />
+          <AllAppsItemImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
           <AllAppsItemTitle>Calculator</AllAppsItemTitle>
         </AllAppsItem>
         <AllAppsItem noHover={true}>
           <AllAppsItemTitle>F</AllAppsItemTitle>
         </AllAppsItem>
         <AllAppsItem title="File Explorer">
-          <AllAppsItemImage src={fileExplorerIcon} alt="file-explorer" />
+          <AllAppsItemImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
           <AllAppsItemTitle>File Explorer</AllAppsItemTitle>
         </AllAppsItem>
         <AllAppsItem title="File Explorer">
-          <AllAppsItemImage src={fileExplorerIcon} alt="file-explorer" />
+          <AllAppsItemImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
           <AllAppsItemTitle>File Explorer</AllAppsItemTitle>
         </AllAppsItem>
       </AllApps>
@@ -213,19 +213,19 @@ const WindowsStartMenu = () => {
           <CategoryTitle>Productivity</CategoryTitle>
           <CategoryTilesContainer>
             <CategoryTile>
-              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
+              <CategoryTileImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
+              <CategoryTileImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
+              <CategoryTileImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
+              <CategoryTileImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
+              <CategoryTileImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
             </CategoryTile>
           </CategoryTilesContainer>
         </Category>
@@ -233,19 +233,19 @@ const WindowsStartMenu = () => {
           <CategoryTitle>Explore</CategoryTitle>
           <CategoryTilesContainer>
             <CategoryTile>
-              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
+              <CategoryTileImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
+              <CategoryTileImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
+              <CategoryTileImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
+              <CategoryTileImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
             </CategoryTile>
             <CategoryTile>
-              <CategoryTileImage src={fileExplorerIcon} alt="file-explorer" />
+              <CategoryTileImage src={FILE_EXPLORE_ICON} alt="file-explorer" />
             </CategoryTile>
           </CategoryTilesContainer>
         </Category>

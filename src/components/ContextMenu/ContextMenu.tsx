@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, IRootState } from "@/app/store"
-import fileExplorerIcon from "@/assets/icons/file-explorer.png"
+import { FILE_EXPLORE_ICON } from "@/assets/assets"
 import { openItemThunk } from "@/context/redux/globalDataSlice"
 import { addItemToPinnedTaskbarSequence } from "@/context/redux/pinnedTaskbarSlice"
 import ContextMenuItem from "./ContextMenuItem"
@@ -34,7 +34,7 @@ const ContextMenu: React.FC = () => {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: fileExplorerIcon
+          icon: FILE_EXPLORE_ICON
         }
       ]
     },
@@ -44,7 +44,7 @@ const ContextMenu: React.FC = () => {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: fileExplorerIcon
+          icon: FILE_EXPLORE_ICON
         }
       ]
     },
@@ -54,7 +54,7 @@ const ContextMenu: React.FC = () => {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: fileExplorerIcon
+          icon: FILE_EXPLORE_ICON
         }
       ]
     },
@@ -70,7 +70,7 @@ const ContextMenu: React.FC = () => {
         {
           label: "View",
           onClick: () => console.log("View Clicked"),
-          icon: fileExplorerIcon
+          icon: FILE_EXPLORE_ICON
         }
       ]
     },
@@ -78,12 +78,12 @@ const ContextMenu: React.FC = () => {
     {
       label: "Display settings",
       // onClick: () => console.log("Display settings clicked"),
-      icon: fileExplorerIcon
+      icon: FILE_EXPLORE_ICON
     },
     {
       label: "Personalize",
       // onClick: () => console.log("Personalize clicked"),
-      icon: fileExplorerIcon
+      icon: FILE_EXPLORE_ICON
     }
   ]
 

@@ -3,9 +3,11 @@ import React, { useEffect, useId, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { twMerge } from "tailwind-merge"
 import { type AppDispatch, IRootState } from "@/app/store"
-import fileExplorerIcon from "@/assets/icons/file-explorer.png"
-import folderIcon from "@/assets/icons/folder.png"
-import propertiesIcon from "@/assets/icons/properties.png"
+import {
+  FILE_EXPLORE_ICON,
+  FOLDER_ICON,
+  PROPERTIES_ICON
+} from "@/assets/assets"
 import {
   bringDisplayToFront,
   maximizeDisplay,
@@ -501,14 +503,14 @@ export default function Display({ id }: { id: string }) {
                 <div className="flex flex-row items-center justify-center">
                   <div className="flex h-[1.375rem] w-[1.375rem] items-center justify-center">
                     <img
-                      src={propertiesIcon}
+                      src={PROPERTIES_ICON}
                       alt="file explorer icon"
                       className="h-4 w-4 object-contain"
                     />
                   </div>
                   <div className="flex h-[1.375rem] w-[1.375rem] items-center justify-center">
                     <img
-                      src={folderIcon}
+                      src={FOLDER_ICON}
                       alt="file explorer icon"
                       className="h-4 w-4 object-contain"
                     />
@@ -629,7 +631,7 @@ export default function Display({ id }: { id: string }) {
                   >
                     <div className="flex aspect-square h-full items-center justify-center p-[0.1875rem]">
                       <img
-                        src={fileExplorerIcon}
+                        src={FILE_EXPLORE_ICON}
                         alt="file explorer icon"
                         className="aspect-square h-full object-contain"
                       />
