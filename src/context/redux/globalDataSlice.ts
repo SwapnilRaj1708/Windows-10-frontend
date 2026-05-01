@@ -97,7 +97,7 @@ const defaultValues: GlobalData = {
     isOpened: false,
     isFocused: false,
     parent: "resume-folder",
-    url: "https://drive.google.com/file/d/1gaepCoxAr6KRVMysEyee7dugIz-LjYf6/preview?usp=sharing"
+    url: "https://drive.google.com/file/d/1dCY4ZP5qDwgwzHYVLpAed3fnxmUfsRoO/preview?usp=sharing"
   },
   "projects-folder": {
     id: "projects-folder",
