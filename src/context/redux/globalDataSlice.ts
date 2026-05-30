@@ -8,6 +8,7 @@ import {
   FILE_EXPLORE_ICON,
   FOLDER_ICON,
   PDF_ICON,
+  PG_GURUKUL_ICON,
   SOFTBOARD_LITE_ICON,
   THIS_PC_ICON,
   TRELLO_ICON,
@@ -111,6 +112,7 @@ const defaultValues: GlobalData = {
     parent: "this-pc-folder",
     children: [
       "creo-file-link",
+      "pg-gurukul-file-link",
       "e-commerce-website-file-link",
       "trello-clone-file-link"
     ]
@@ -151,6 +153,18 @@ const defaultValues: GlobalData = {
     parent: "projects-folder",
     url: "https://github.com/SwapnilRaj1708/trello-clone"
   },
+  "pg-gurukul-file-link": {
+    id: "pg-gurukul-file-link",
+    type: GlobalDataType.FILE_LINK,
+    name: "PG Gurukul",
+    icon: PG_GURUKUL_ICON,
+    taskbarIcon: PG_GURUKUL_ICON,
+    isPinnedToTaskbar: false,
+    isOpened: false,
+    isFocused: false,
+    parent: "projects-folder",
+    url: "https://paragliding.guru/"
+  },
   "experience-folder": {
     id: "experience-folder",
     type: GlobalDataType.FOLDER,
@@ -161,9 +175,9 @@ const defaultValues: GlobalData = {
     isOpened: false,
     isFocused: false,
     children: [
+      "twizzr-file-link",
       "el-nova-labs-file-link",
       "softboard-lite-file-link",
-      "twizzr-file-link",
       "engineerhub-file-link"
     ],
     parent: "this-pc-folder"

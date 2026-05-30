@@ -15,8 +15,9 @@ export const TRELLO_ICON = `${ASSETS_BASE_URL}/icons/trello.png`
 export const ENGINEERHUB_ICON = `${ASSETS_BASE_URL}/icons/engineerhub.png`
 export const SOFTBOARD_LITE_ICON = `${ASSETS_BASE_URL}/icons/softboard-lite.png`
 export const EL_NOVA_LABS_ICON = `${ASSETS_BASE_URL}/icons/el-nova-labs.png`
-export const TWIZZR_ICON = `${ASSETS_BASE_URL}/icons/twizzr.png`
+export const TWIZZR_ICON = `${ASSETS_BASE_URL}/icons/twizzr.avif`
 export const RESIZE_ICON_ICON = `${ASSETS_BASE_URL}/icons/resize-icon.png`
+export const PG_GURUKUL_ICON = `${ASSETS_BASE_URL}/icons/pg-gurukul.png`
 
 // Lock Screens
 export const LOCK_SCREEN_1 = `${ASSETS_BASE_URL}/lockScreen/lock-screen-1.jpg`
